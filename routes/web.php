@@ -9,14 +9,14 @@ use App\Http\Controllers\WelcomeController;
 // });
 Route::get('/', [WelcomeController::class, 'index']);
 
-Route::resource('hero-sections', HeroSectionController::class);
 
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+    ])->group(function () {
+    Route::resource('hero-sections', HeroSectionController::class);
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

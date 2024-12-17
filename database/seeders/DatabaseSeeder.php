@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\HeroSectionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'jon@test.com',
             'password' => '12345678'
         ]);
+        $this->call(HeroSectionSeeder::class);
     }
 }
