@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HeroSectionRequest;
 use App\Models\HeroSection;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,8 @@ class HeroSectionController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(HeroSectionRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'hero_image' => 'required|image'
-        ]);
-
         $heroSection = HeroSection::create($request->only('title', 'description'));
 
         if ($request->hasFile('hero_image')) {
@@ -42,14 +37,8 @@ class HeroSectionController extends Controller
     }
 
 
-    public function update(Request $request, HeroSection $heroSection)
+    public function update(HeroSectionRequest $request, HeroSection $heroSection)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'hero_image' => 'nullable|image'
-        ]);
-
         $heroSection->update($request->only('title', 'description'));
 
         if ($request->hasFile('hero_image')) {
