@@ -1,10 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HeroSectionController;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+// });
+Route::get('/', [WelcomeController::class, 'index']);
+
+Route::resource('hero-sections', HeroSectionController::class);
+
 
 Route::middleware([
     'auth:sanctum',
