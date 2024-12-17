@@ -4,11 +4,16 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Hero Sections') }}
             </h2>
-            <x-button>
-                <a href="{{ route('hero-sections.create') }}">
-                    {{ __('Create') }}
-                </a>
-            </x-button>
+            @if ($heroSections->isEmpty())
+                <x-button>
+                    <a href="{{ route('hero-sections.create') }}">
+                        {{ __('Create') }}
+                    </a>
+                </x-button>
+            @endif
+
+
+
         </div>
     </x-slot>
 
@@ -33,9 +38,8 @@
                         <x-label>{{ __('Hero Image') }}</x-label>
                         <!-- Hero Image -->
                         @if ($heroSection->getFirstMediaUrl('hero_image'))
-                            <img src="{{ $heroSection->getFirstMediaUrl('hero_image') }}"
-                                 alt="Hero Image"
-                                 class="w-full h-48 object-cover rounded mb-4">
+                            <img src="{{ $heroSection->getFirstMediaUrl('hero_image') }}" alt="Hero Image"
+                                class="w-full h-48 object-cover rounded mb-4">
                         @endif
 
                         <!-- Action Buttons -->
@@ -48,7 +52,8 @@
                             </x-button>
 
                             <!-- Delete Button -->
-                            <form action="{{ route('hero-sections.destroy', $heroSection->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <form action="{{ route('hero-sections.destroy', $heroSection->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this item?');">
                                 @csrf
                                 @method('DELETE')
                                 <x-danger-button type="submit">
